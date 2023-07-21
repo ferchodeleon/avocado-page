@@ -15,12 +15,17 @@
     border-radius: 2rem;
 }
 
-.title-avo {
-    padding-left: .5rem;
-}
-
 .image-avo {
     border-radius: 50%;
+}
+
+.price-avo {
+    padding-left: 1rem;
+}
+
+.container-detail {
+    text-align: start;
+    padding-left: .5rem;
 }
 
 .container-avo:hover {

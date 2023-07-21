@@ -35,9 +35,14 @@ window.fetch(`${baseUrl}/api/avo`)
         //Crear precio
         const price = document.createElement('div');
         price.textContent = formatPrice(item.price);
+        price.className = 'price-avo';
+
+        const container_detail = document.createElement('div');
+        container_detail.append(title, price);
+        container_detail.className = 'container-detail';
 
         const container = document.createElement('div');
-        container.append(image, title, price);
+        container.append(image, container_detail);
         container.className = 'container-avo justify-center items-center shadow-lg';
 
         allItems.push(container);
