@@ -1,6 +1,47 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+const baseUrl = 'https://platzi-avo.vercel.app';
 
-console.log('Happy hacking :)')
+const appNode = document.querySelector('#app');
+appNode.className = 'appNode';
+
+//Api INTl internacionalización, se usa para dar formato a fechas y monedas
+const formatPrice = (price) => {
+    const newPrice = new window.Intl.NumberFormat('en-EN', {
+        style: 'currency',
+        currency: 'USD',
+    }).format(price);
+    return newPrice;
+}
+
+//web api
+// Conectarnos al servidor
+window.fetch(`${baseUrl}/api/avo`)
+//Procesar la respuesta y convertirla en JSON
+.then(respuesta => respuesta.json())
+//JSON -> Data -> Renderizar info en browser
+.then((responseJson) => {
+    const allItems = [];
+    responseJson.data.forEach(item => {
+
+        //Crear imagen
+        const image = document.createElement('img');
+        image.src = baseUrl+item.image;
+        image.className = 'image-avo w-32';
+
+        //Crear titulo
+        const title = document.createElement('h2');
+        title.textContent = item.name;
+        title.className = 'title-avo text-xl';
+
+        //Crear precio
+        const price = document.createElement('div');
+        price.textContent = formatPrice(item.price);
+
+        const container = document.createElement('div');
+        container.append(image, title, price);
+        container.className = 'container-avo justify-center items-center shadow-lg';
+
+        allItems.push(container);
+    });
+
+    appNode.append(...allItems);
+});
